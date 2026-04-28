@@ -1,6 +1,6 @@
 # automacao-excel
 
-Automação de mensagens de boas vindas para números inclusos em uma tabela.
+Automação de mensagens para números inclusos em uma tabela.
 
 O algoritmo procura o arquivo excel mencionado utilizando a biblioteca OpenPyXL, e vasculha cada linha, pegando o nome e o número das pessoas, e para cada linha envia uma mensagem que é buscada no arquivo de texto que contém a mensagem desejada.
 Para o controle de fluxo, ele retorna o nome e o número da pessoa no terminal durante a execução, e também o
