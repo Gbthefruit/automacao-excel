@@ -44,9 +44,9 @@ if erro is None:
             wpp.sendwhatmsg_instantly (
                 cell,
                 mensagem,
-                wait_time=15,
+                wait_time=10,
                 tab_close=True
             )
-            
+            print("Mensagem Enviada.\n")
     except FileNotFoundError:
         print("Arquivo de texto não encontrado.")
