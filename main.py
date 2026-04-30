@@ -1,5 +1,6 @@
 import pywhatkit as wpp
 from openpyxl import load_workbook as xl
+import extensions
 
 erro = None
 
@@ -20,7 +21,7 @@ try:
         if not cell:       
             break
 
-        cell_format = '+' + str(cell.value)
+        cell_format = extensions.verificacao(str(cell.value))
         lista_celulares.append(cell_format)
         lista_nomes.append(nome)
 
