@@ -17,13 +17,14 @@ try:
     for linha in range(2, ultima_linha + 1):
         cell = aba_contatos.cell(row=linha, column=1)
         nome = aba_contatos.cell(row=linha, column=2).value
+        feedback = aba_contatos.cell(row=linha, column=3).value
 
         if not cell:       
             break
-
-        cell_format = extensions.verificacao(str(cell.value))
-        lista_celulares.append(cell_format)
-        lista_nomes.append(nome)
+        if not feedback: 
+            cell_format = extensions.verificacao(str(cell.value))
+            lista_celulares.append(cell_format)
+            lista_nomes.append(nome)
 
 except FileNotFoundError:
     erro = FileExistsError
