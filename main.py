@@ -3,6 +3,8 @@ from openpyxl import load_workbook as xl
 import extensions
 
 erro = None
+i = 0
+linha_tabela = []
 
 try:
     # abre o arquivo excel
@@ -15,14 +17,15 @@ try:
 
     # verifica os números e nomes da planilha
     for linha in range(2, ultima_linha + 1):
-        cell = aba_contatos.cell(row=linha, column=1)
+        cell = aba_contatos.cell(row=linha, column=1).value
         nome = aba_contatos.cell(row=linha, column=2).value
         feedback = aba_contatos.cell(row=linha, column=3).value
 
         if not cell:       
             break
-        if not feedback: 
-            cell_format = extensions.verificacao(str(cell.value))
+        if not feedback and cell != '':
+            linha_tabela.append(linha)
+            cell_format = extensions.verificacao(str(cell))
             lista_celulares.append(cell_format)
             lista_nomes.append(nome)
 
@@ -42,13 +45,18 @@ if erro is None:
         for cell in lista_celulares:
             print(lista_nomes[n], cell)
             n += 1
-            
+
             wpp.sendwhatmsg_instantly (
                 cell,
                 mensagem,
-                wait_time=10,
+                wait_time=7,
                 tab_close=True
             )
-            print("Mensagem Enviada.\n")
+            feedback = "contatado via whatsapp, aguardando resposta."
+            aba_contatos.cell(row=linha_tabela[i], column=3, value=feedback)
+            arquivo_xl.save("contatosWpp.xlsx")
+            print(feedback)
+            i += 1
+
     except FileNotFoundError:
         print("Arquivo de texto não encontrado.")

@@ -4,7 +4,10 @@ import sys
 def verificacao(cell):
     # remove tudo que não for número
     cell = re.sub(r"\D", "", cell)
-        
+
+    if cell == '':
+        return ''
+
     if cell[0] != "5" and cell[1] != "5":
         cell = "+55" + cell
 
